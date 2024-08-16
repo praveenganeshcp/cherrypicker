@@ -1,0 +1,19 @@
+{
+  "name": "request-manager-core",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/request-manager/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/request-manager",
+        "main": "libs/request-manager/src/index.ts",
+        "tsConfig": "libs/request-manager/tsconfig.lib.json",
+        "assets": ["libs/request-manager/*.md"]
+      }
+    }
+  }
+}
