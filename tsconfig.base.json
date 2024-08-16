@@ -20,6 +20,9 @@
       ],
       "@cherrypicker/request-manager-core": [
         "libs/request-manager/src/index.ts"
+      ],
+      "@cherrypicker/request-manager-fe": [
+        "libs/request-manager-fe/src/index.ts"
       ]
     }
   },

@@ -1,0 +1,36 @@
+{
+  "name": "request-manager-fe",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/request-manager-fe/src",
+  "prefix": "rm",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/request-manager-fe/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/request-manager-fe/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/request-manager-fe/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/request-manager-fe/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
