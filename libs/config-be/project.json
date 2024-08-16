@@ -1,0 +1,20 @@
+{
+  "name": "config-be",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/config-be/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/config-be",
+        "tsConfig": "libs/config-be/tsconfig.lib.json",
+        "packageJson": "libs/config-be/package.json",
+        "main": "libs/config-be/src/index.ts",
+        "assets": ["libs/config-be/*.md"]
+      }
+    }
+  }
+}

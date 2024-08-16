@@ -17,6 +17,8 @@
     "paths": {
       "@cherrypicker/auth-be": ["libs/auth-be/src/index.ts"],
       "@cherrypicker/auth-fe": ["libs/auth-fe/src/index.ts"],
+      "@cherrypicker/config-be": ["libs/config-be/src/index.ts"],
+      "@cherrypicker/repository": ["libs/repository/src/index.ts"],
       "@cherrypicker/request-manager-be": [
         "libs/request-manager-be/src/index.ts"
       ],
