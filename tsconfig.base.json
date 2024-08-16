@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cherrypicker/request-manager-be": [
+        "libs/request-manager-be/src/index.ts"
+      ],
       "@cherrypicker/request-manager-core": [
         "libs/request-manager/src/index.ts"
       ]

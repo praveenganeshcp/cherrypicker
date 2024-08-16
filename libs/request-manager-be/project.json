@@ -1,0 +1,20 @@
+{
+  "name": "request-manager-be",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/request-manager-be/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/request-manager-be",
+        "tsConfig": "libs/request-manager-be/tsconfig.lib.json",
+        "packageJson": "libs/request-manager-be/package.json",
+        "main": "libs/request-manager-be/src/index.ts",
+        "assets": ["libs/request-manager-be/*.md"]
+      }
+    }
+  }
+}
