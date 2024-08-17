@@ -11,8 +11,9 @@ import { FetchCherrypickRequestDetailUsecase } from './usecases/fetch-cherrypick
 import { FetchUserAllCherrpickRequestUsecase } from './usecases/fetch-user-all-cherrypick-requests.usecase';
 import { ApproveAndInitiateCherrypickUsecase } from './usecases/approve-and-initiate-cherrypick.usecase';
 import { UpdateCherrypickRequestStatusUsecase } from './usecases/update-cherrypick-request-status.usecase';
+import { NotificationsBeModule } from '@cherrypick/notifications-be';
 @Module({
-  imports: [RepositoryModule, GithubApiModule],
+  imports: [RepositoryModule, GithubApiModule, NotificationsBeModule],
   providers: [
     CherrypickRequestRepository,
     CherrypickCommitRepository,
