@@ -74,6 +74,18 @@ import {
       } as Filter<T>);
       return savedData as T;
     }
+
+    public async saveMany(data: OptionalId<T>[]): Promise<T[]> {
+      this.logger.log(`Creating new multiple records in ${this.collectionName}`);
+      const saveResult = await this.collection.insertMany(
+        data as OptionalUnlessRequiredId<T>[]
+      );
+      this.logger.log(`New records created in ${this.collectionName}`);
+      const savedData: unknown = await this.collection.findOne({
+        _id: {$in: Object.values(saveResult.insertedIds)},
+      } as Filter<T>);
+      return savedData as T[];
+    }
   
     public async updateOne(
       filter: Filter<T>,

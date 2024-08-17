@@ -2,7 +2,7 @@ import { githubConfig } from "@cherrypicker/config-be";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigType } from "@nestjs/config";
 import axios from "axios";
-import { BEGithubCommit, GithubCommit, GithubUser } from "./types";
+import { BEGithubCommit, GitCommit, GithubUser } from "./types";
 
 @Injectable()
 export class GithubService {
@@ -52,24 +52,42 @@ export class GithubService {
         };
     }
 
-    async getCommits(repoName: string, loginName: string, accessToken: string): Promise<GithubCommit[]> {
+    async getCommits(repoName: string, loginName: string, accessToken: string): Promise<GitCommit[]> {
         this.logger.log(`Fetching commits in ${loginName}/${repoName}`);
-        const response = await axios.get<BEGithubCommit[]>(`${this.GITHUB_API_HOST}/repos/${loginName}/${repoName}/commits`, {
+        const response = await axios.get<BEGithubCommit[]>(`${this.GITHUB_API_HOST}/repos/${loginName}/${repoName}/commits?author=${loginName}`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
                 'Accept': 'application/vnd.github+json',
                 'X-GitHub-Api-Version': '2022-11-28'
             }
         })
-        const commits: GithubCommit[] = response.data.map(commit => {
-            const githubCommit: GithubCommit = {
+        const commits: GitCommit[] = response.data.map(commit => {
+            const githubCommit: GitCommit = {
                 sha: commit.sha,
                 message: commit.commit.message,
-                htmlUrl: commit.html_url
+                htmlUrl: commit.html_url,
+                timestamp: new Date(commit.commit.committer.date)
             }
             return githubCommit
         })
         this.logger.log(`Found ${commits.length} commits`)
         return commits;
+    }
+
+    async triggerWorkflow(accessToken: string, commits: string[]) {
+        this.logger.log(`Initiating cherrypick workflow`)
+        const response = await axios.post(`${this.GITHUB_API_HOST}/repos/praveenganeshcp/hello_world/actions/workflows/simpewf.yaml/dispatches`, {
+            ref: "main",
+            inputs: {
+                "commits": commits.join(',')
+            }
+        }, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28'
+            }
+        })
+        return response.data;
     }
 }

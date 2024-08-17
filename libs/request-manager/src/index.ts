@@ -1,1 +1,1 @@
-export * from './lib/request-manager-core';
+export * from "./types";
