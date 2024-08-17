@@ -9,6 +9,9 @@ export interface BEGithubCommit {
     sha: string;
     commit: {
         message: string;
+        committer: {
+            date: string;
+        }
     }
     html_url: string;
 }
@@ -16,8 +19,9 @@ export interface BEGithubCommit {
 /**
  * Commit domain model
  */
-export interface GithubCommit {
+export interface GitCommit {
     sha: string;
     message: string;
     htmlUrl: string;
+    timestamp: Date;
 }
