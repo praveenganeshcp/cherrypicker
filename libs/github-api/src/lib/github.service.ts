@@ -74,12 +74,13 @@ export class GithubService {
         return commits;
     }
 
-    async triggerWorkflow(accessToken: string, commits: string[]) {
-        this.logger.log(`Initiating cherrypick workflow`)
+    async triggerWorkflow(accessToken: string, commits: string[], requestId: string, targetBranch: string) {
+        this.logger.log(`Initiating cherrypick workflow with commits ${commits.join(',')} in ${targetBranch} branch for request ${requestId}`)
         const response = await axios.post(`${this.GITHUB_API_HOST}/repos/praveenganeshcp/hello_world/actions/workflows/simpewf.yaml/dispatches`, {
-            ref: "main",
+            ref: targetBranch,
             inputs: {
-                "commits": commits.join(',')
+                commits: commits.join(','),
+                requestId
             }
         }, {
             headers: {
