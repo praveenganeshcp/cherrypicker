@@ -35,7 +35,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
       throw new HttpException('Token not found in request', 401);
     }
     const jwtPayload = this.jwtService.verifyToken(jwt);
-    if (!jwt) {
+    if (!jwtPayload) {
       throw new HttpException('Invalid or token expired', 401);
     }
     const user = await this.userRepository.findOne({
