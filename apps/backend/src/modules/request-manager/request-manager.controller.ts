@@ -45,7 +45,7 @@ export class RequestManagerController {
             repoId: new ObjectId(createCherrypickRequestDTO.repoId),
             commits: createCherrypickRequestDTO.commits,
             notesForApprover: createCherrypickRequestDTO.notesForApprover,
-            createdBy: user.subjectId
+            createdBy: user
         })
     }
 
