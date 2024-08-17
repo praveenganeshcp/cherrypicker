@@ -5,7 +5,11 @@ import { CherrypickCommitRepository } from "../repository/cherrypick-commit.repo
 import { CherrypickRequest } from "../entities/cherrypick-request";
 import { CherrypickStatus } from "@cherrypicker/request-manager-core";
 import { CherrypickCommit } from "../entities/cherrypick-commit";
-import { Injectable, Logger } from "@nestjs/common";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import { EmailNotificationService } from "@cherrypick/notifications-be";
+import { User } from "@cherrypicker/auth-be";
+import { appConfig } from "@cherrypicker/config-be";
+import { ConfigType } from "@nestjs/config";
 
 export interface CreateCherrypickRequestUsecaseInput {
     title: string;
@@ -13,7 +17,7 @@ export interface CreateCherrypickRequestUsecaseInput {
     repoId: ObjectId;
     notesForApprover: string
     commits: GitCommit[];
-    createdBy: number
+    createdBy: User
 }
 
 @Injectable()
@@ -24,6 +28,9 @@ export class CreateCherrypickRequestUsecase {
     constructor(
         private readonly cherrypickRequestRepo: CherrypickRequestRepository,
         private readonly cherrypickCommitRepo: CherrypickCommitRepository,
+        private readonly emailNotificationService: EmailNotificationService,
+        @Inject(appConfig.KEY)
+        private appConfiguration: ConfigType<typeof appConfig>,
     ) {}
 
     async execute(input: CreateCherrypickRequestUsecaseInput): Promise<void> {
@@ -33,6 +40,19 @@ export class CreateCherrypickRequestUsecase {
         this.logger.log('Saving commits related to requests')
         await this.saveRequestCommits(createdRequest, input.commits);
         this.logger.log('Commits saved successfully');
+        this.logger.log('Sending email for approval');
+        this.emailNotificationService.notify({
+            title: `Approval request for ${createdRequest.title}`,
+            subject: '[TESTING] Cherrypickr - Approval request',
+            text: `${input.createdBy.name} has requested approval to cherrypick commits`,
+            cta: {
+                label: "Approve",
+                link: `${this.appConfiguration.FE_HOST_ADDRESS}/cherrypick-requests/${createdRequest._id.toString()}/approve`,
+                copy: 'Click the button below to approve the request'
+            },
+            username: 'Approver',
+            toEmailId: 'praveenganesh7@gmail.com'
+        })
     }   
 
     private async createRequest(input: CreateCherrypickRequestUsecaseInput): Promise<CherrypickRequest> {
@@ -43,7 +63,7 @@ export class CreateCherrypickRequestUsecase {
             createdOn: new Date(),
             status: CherrypickStatus.WaitingForApproval,
             completedOn: null,
-            createdBy: input.createdBy,
+            createdBy: input.createdBy.subjectId,
             notesForApprover: input.notesForApprover
         }
         return this.cherrypickRequestRepo.save(newCherrypickRequest);
