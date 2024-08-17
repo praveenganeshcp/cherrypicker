@@ -31,6 +31,15 @@ class EnvironmentVariables {
 
   @IsString()
   FE_HOST_ADDRESS!: string;
+
+  @IsString()
+  GITHUB_CLIENT_ID!: String;
+
+  @IsString()
+  GITHUB_CLIENT_SECRET!: String;
+
+  @IsString()
+  GITHUB_REDIRECT_URL!: String;
 }
 
 export const ENV_VARIABLES: EnvironmentVariables =
