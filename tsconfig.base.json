@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@cherrypick/notifications-be": ["libs/notifications-be/src/index.ts"],
       "@cherrypicker/auth-be": ["libs/auth-be/src/index.ts"],
       "@cherrypicker/auth-fe": ["libs/auth-fe/src/index.ts"],
       "@cherrypicker/config-be": ["libs/config-be/src/index.ts"],
