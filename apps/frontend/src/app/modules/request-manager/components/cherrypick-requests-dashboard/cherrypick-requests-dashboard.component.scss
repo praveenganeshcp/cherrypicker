@@ -1,0 +1,22 @@
+.loader, .empty-request-copy {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.empty-request-copy {
+    row-gap: 12px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.request-dashboard {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 2rem
+}

@@ -9,5 +9,15 @@ export const appRoutes: Route[] = [
         path: 'github/authorize/callback',
         loadComponent: () => import("./modules/auth/components/oauth-callback.component").then(c => c.OauthCallbackComponent)
     },
-    
+    {
+        path: 'app',
+        loadComponent: () => import("./modules/app-shell/components/app-shell/app-shell.component").then(c => c.AppShellComponent),
+        children: [
+            {
+                path: 'cherrypick-requests',
+                loadComponent: () => import("./modules/request-manager/components/cherrypick-requests-dashboard/cherrypick-requests-dashboard.component").then(c => c.CherrypickRequestsDashboardComponent)
+            },
+            
+        ]
+    }
 ];

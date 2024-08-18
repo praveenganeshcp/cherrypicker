@@ -1,1 +1,3 @@
-export * from './lib/request-manager-fe/request-manager-fe.component';
+export * from "./lib/types"
+export * from "./lib/services/requests-manager.service";
+export * from "./lib/components/cherrypick-requests-grid/cherrypick-requests-grid.component";
