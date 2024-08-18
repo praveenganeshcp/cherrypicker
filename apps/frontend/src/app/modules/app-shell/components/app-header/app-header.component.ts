@@ -5,11 +5,12 @@ import { UserProfile } from '@cherrypicker/auth-fe';
 import { Store } from '@ngrx/store';
 import { AppState } from 'apps/frontend/src/app/app.state';
 import { userProfileSelector } from '../../../auth/store/selectors';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'cp-app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './app-header.component.html',
   styleUrl: './app-header.component.scss',
 })
