@@ -1,1 +1,10 @@
-<cp-nx-welcome></cp-nx-welcome> <router-outlet></router-outlet>
+<ng-container *ngIf="(isProfileLoading$ | async) === true; else routerRoutlet">
+    <div class="user-profile-loader">
+        <h1>Loading user profile...</h1>
+    </div>
+</ng-container>
+<ng-template #routerRoutlet>
+    <div class="app-root">
+        <router-outlet></router-outlet>
+    </div>
+</ng-template>
