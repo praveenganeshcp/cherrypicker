@@ -16,7 +16,6 @@ async function bootstrap() {
   app.use(cookieParser());
   const globalPrefix = 'api';
 
-  // set app port
   const applicationConfig: ConfigType<typeof appConfig> = app.get(
     appConfig.KEY
   );
