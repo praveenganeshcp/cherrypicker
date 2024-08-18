@@ -9,6 +9,13 @@ export interface CherrypickCommit {
     requestId: string;
 }
 
+export interface GitCommit {
+    sha: string;
+    message: string;
+    htmlUrl: string;
+    timestamp: Date;
+}
+
 export interface CherrypickRequest {
     _id: string;
     title: string;
@@ -32,14 +39,7 @@ export interface VCSRepository {
 
 export interface CreateRequestPayload {
     title: string,
-    commits: Array<
-        {
-            sha: string,
-            message: string,
-            htmlUrl: string,
-            timestamp: string
-        }
-    >,
+    commits: Array<GitCommit>,
     targetBranch: string,
     repoId: string
 }

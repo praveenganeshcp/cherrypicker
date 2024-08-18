@@ -54,7 +54,7 @@ export class GithubService {
 
     async getCommits(repoName: string, loginName: string, accessToken: string): Promise<GitCommit[]> {
         this.logger.log(`Fetching commits in ${loginName}/${repoName}`);
-        const response = await axios.get<BEGithubCommit[]>(`${this.GITHUB_API_HOST}/repos/${loginName}/${repoName}/commits?author=${loginName}`, {
+        const response = await axios.get<BEGithubCommit[]>(`${this.GITHUB_API_HOST}/repos/${loginName}/${repoName}/commits`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
                 'Accept': 'application/vnd.github+json',
