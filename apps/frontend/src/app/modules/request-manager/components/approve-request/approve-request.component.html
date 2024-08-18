@@ -1,0 +1,14 @@
+<div *ngIf="requestDetail" class="request-details">
+    <h1>Cherrypick Details</h1>
+    <rm-preview-request
+        [title]="requestDetail.title"
+        [targetBranch]="requestDetail.targetBranch"
+        [commits]="commits"
+        [repoName]="repoName"
+        [status]="requestDetail.status"
+    >
+    </rm-preview-request>
+    <div *ngIf="showApproveButton" style="width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 3rem;">
+        <button mat-flat-button (click)="handleApproveRequest()">Approve</button>
+    </div>
+</div>
