@@ -1,0 +1,11 @@
+<div *ngIf="requestDetail" class="request-details">
+    <h1>Cherrypick Details</h1>
+    <rm-preview-request
+        [title]="requestDetail.title"
+        [targetBranch]="requestDetail.targetBranch"
+        [commits]="commits"
+        [repoName]="repoName"
+        [status]="requestDetail.status"
+    >
+    </rm-preview-request>
+</div>

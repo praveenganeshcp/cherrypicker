@@ -1,7 +1,7 @@
 <div class="app-header">
-    <h3>CherryPickr</h3>
+    <a [routerLink]="['/app', 'cherrypick-requests']">CherryPickr</a>
     <div class="profile-details" *ngIf="userProfile$ | async as userProfile">
         <span>{{ userProfile.name }}</span>
-        <img height="50" width="50" class="avatar" [src]="userProfile.avatarUrl" />
+        <img height="40" width="40" class="avatar" [src]="userProfile.avatarUrl" />
     </div>
 </div>
