@@ -6,3 +6,4 @@ export * from "./lib/usecases/fetch-cherrypick-request-detail.usecase";
 export * from "./lib/usecases/fetch-user-all-cherrypick-requests.usecase";
 export * from "./lib/usecases/approve-and-initiate-cherrypick.usecase";
 export * from "./lib/usecases/update-cherrypick-request-status.usecase";
+export * from "./lib/usecases/get-all-vcs-repo.usecase";

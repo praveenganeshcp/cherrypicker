@@ -1,5 +1,5 @@
 import { AuthUser, User } from "@cherrypicker/auth-be";
-import { AddVCSRepoUsecase, ApproveAndInitiateCherrypickUsecase, CreateCherrypickRequestUsecase, FetchCherrypickRequestDetailUsecase, FetchCommitsInRepoUsecase, FetchUserAllCherrpickRequestUsecase, UpdateCherrypickRequestStatusUsecase } from "@cherrypicker/request-manager-be";
+import { AddVCSRepoUsecase, ApproveAndInitiateCherrypickUsecase, CreateCherrypickRequestUsecase, FetchCherrypickRequestDetailUsecase, FetchCommitsInRepoUsecase, FetchUserAllCherrpickRequestUsecase, GetAllVCSRepoUsecase, UpdateCherrypickRequestStatusUsecase } from "@cherrypicker/request-manager-be";
 import { Body, Controller, Get, Logger, Param, Patch, Post } from "@nestjs/common";
 import { AddVCSRepoDTO, CreateCherrypickRequestDTO } from "./request-manager-dto";
 import { ObjectId } from "mongodb";
@@ -16,7 +16,8 @@ export class RequestManagerController {
         private readonly fetchCherrypickRequestDetailsUsecase: FetchCherrypickRequestDetailUsecase,
         private readonly fetchUserAllCherrypickRequestUsecase: FetchUserAllCherrpickRequestUsecase,
         private readonly approveAndInitiateCherrypickUsecase: ApproveAndInitiateCherrypickUsecase,
-        private readonly updateCherrypickStatusUsecase: UpdateCherrypickRequestStatusUsecase
+        private readonly updateCherrypickStatusUsecase: UpdateCherrypickRequestStatusUsecase,
+        private readonly getAllVcsRepoUsecase: GetAllVCSRepoUsecase
     ) {}
 
     @Get('repo/:repoName/commits')
@@ -52,6 +53,11 @@ export class RequestManagerController {
     @Get('requests')
     fetchUserAllCherrypickRequests(@AuthUser() user: User) {
         return this.fetchUserAllCherrypickRequestUsecase.execute(user.subjectId);
+    }
+
+    @Get('vcs-repo')
+    fetchAllVcsRepo() {
+        return this.getAllVcsRepoUsecase.execute();
     }
 
     @Patch('requests/:requestId/approve')

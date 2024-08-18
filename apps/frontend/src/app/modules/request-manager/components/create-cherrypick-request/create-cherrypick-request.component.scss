@@ -1,0 +1,57 @@
+.create-request-stepper {
+    margin: 2rem 1rem;
+}
+
+.select-repository {
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 4rem;
+
+    .repo-name {
+        background-color: wheat;
+        padding: 0.5rem;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+}
+
+.request-details-container {
+    margin-top: 2rem;    
+    height: 50vh;
+}
+
+.request-details-footer {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+}
+
+.selected-commits {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    height: 100%;
+    overflow: auto;
+}
+
+.commits-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.review-request-footer {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

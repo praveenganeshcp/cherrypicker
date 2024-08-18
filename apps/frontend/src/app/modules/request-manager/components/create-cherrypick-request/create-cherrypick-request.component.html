@@ -1,0 +1,76 @@
+  <mat-stepper class="create-request-stepper" [formGroup]="cherrypickRequestForm" [linear]="true" #stepper>
+    <mat-step label="Select repository">
+      
+      <div class="select-repository">
+          <h3>Select Repository</h3>
+          <mat-radio-group formControlName="repo" aria-label="Select an option">
+            <ng-container *ngFor="let repo of allRepos">
+                <mat-radio-button style="display: block; margin-bottom: 0.75rem;" [value]="repo">
+                  <span class="repo-name">{{ repo.name }}</span>
+                </mat-radio-button>
+            </ng-container>
+          </mat-radio-group>
+          <button mat-button matStepperNext>Next</button>
+      </div>
+
+    </mat-step>
+    <mat-step label="Fill cherrypick details">
+
+      <div class="request-details-container">
+
+        <mat-form-field style="width: 20vw;">
+          <mat-label>Select Environment</mat-label>
+          <mat-select formControlName="targetBranch" required>
+            <mat-option value="release-2024-07-20">QA (release-2024-07-20)</mat-option>
+            <mat-option value="release-2024-07-06">Production (release-2024-07-06)</mat-option>
+            <mat-option value="main">Other</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field style="width: 75%; margin-left: 1rem;">
+            <mat-label>Title</mat-label>
+            <input placeholder="Eg: Timezone feature for BIAL" matInput formControlName="title" />
+        </mat-form-field>
+
+        <div class="commits-container">
+          <mat-form-field style="width: 40vw; align-self: flex-start;">
+              <mat-label>Select Commits</mat-label>
+              <mat-select multiple formControlName="commits" required>
+                <mat-option style="padding: 1rem;" *ngFor="let commit of allCommits" [value]="commit">
+                  <span style="padding: 1rem;">{{ commit.message }}</span>
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+
+          <div class="selected-commits">
+            <ng-container *ngFor="let commit of selectedCommits">
+              <rm-commit-info [message]="commit.message" [url]="commit.htmlUrl" [sha]="commit.sha" [timestamp]="commit.timestamp"></rm-commit-info>
+            </ng-container>
+          </div>
+        </div>
+
+      </div>
+
+        <div class="request-details-footer">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step label="Review">
+      
+      <rm-preview-request
+        [title]="reviewData.title"
+        [repoName]="reviewData.repoName"
+        [commits]="reviewData.commits"
+        [targetBranch]="reviewData.targetBranch"
+        style="margin-top: 1rem; display: block;"
+      >
+
+      </rm-preview-request>
+        
+      <div class="review-request-footer">
+        <button (click)="handleCreateRequest()" mat-flat-button>Create Request</button>
+      </div>
+    </mat-step>
+</mat-stepper>
+  

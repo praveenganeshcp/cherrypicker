@@ -12,6 +12,7 @@ import { FetchUserAllCherrpickRequestUsecase } from './usecases/fetch-user-all-c
 import { ApproveAndInitiateCherrypickUsecase } from './usecases/approve-and-initiate-cherrypick.usecase';
 import { UpdateCherrypickRequestStatusUsecase } from './usecases/update-cherrypick-request-status.usecase';
 import { NotificationsBeModule } from '@cherrypick/notifications-be';
+import { GetAllVCSRepoUsecase } from './usecases/get-all-vcs-repo.usecase';
 @Module({
   imports: [RepositoryModule, GithubApiModule, NotificationsBeModule],
   providers: [
@@ -24,7 +25,8 @@ import { NotificationsBeModule } from '@cherrypick/notifications-be';
     FetchCherrypickRequestDetailUsecase,
     FetchUserAllCherrpickRequestUsecase,
     ApproveAndInitiateCherrypickUsecase,
-    UpdateCherrypickRequestStatusUsecase
+    UpdateCherrypickRequestStatusUsecase,
+    GetAllVCSRepoUsecase
   ],
   exports: [
     FetchCommitsInRepoUsecase,
@@ -33,7 +35,8 @@ import { NotificationsBeModule } from '@cherrypick/notifications-be';
     FetchCherrypickRequestDetailUsecase,
     FetchUserAllCherrpickRequestUsecase,
     ApproveAndInitiateCherrypickUsecase,
-    UpdateCherrypickRequestStatusUsecase
+    UpdateCherrypickRequestStatusUsecase,
+    GetAllVCSRepoUsecase
   ]
 })
 export class RequestManagerBeModule {}
