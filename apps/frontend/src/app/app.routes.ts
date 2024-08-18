@@ -17,7 +17,18 @@ export const appRoutes: Route[] = [
                 path: 'cherrypick-requests',
                 loadComponent: () => import("./modules/request-manager/components/cherrypick-requests-dashboard/cherrypick-requests-dashboard.component").then(c => c.CherrypickRequestsDashboardComponent)
             },
-            
+            {
+                path: 'cherrypick-requests/new',
+                loadComponent: () => import("./modules/request-manager/components/create-cherrypick-request/create-cherrypick-request.component").then(c => c.CreateCherrypickRequestComponent)
+            },
+            {
+                path: 'cherrypick-requests/:requestId',
+                loadComponent: () => import('./modules/request-manager/components/cherrypick-request-detail/cherrypick-request-detail.component').then(c => c.CherrypickRequestDetailComponent)
+            },
+            {
+                path: 'cherrypick-requests/:requestId/approve',
+                loadComponent: () => import('./modules/request-manager/components/approve-request/approve-request.component').then(c => c.ApproveRequestComponent)
+            }
         ]
     }
 ];
