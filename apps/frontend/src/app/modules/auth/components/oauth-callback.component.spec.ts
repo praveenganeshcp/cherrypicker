@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthFeComponent } from './auth-fe.component';
+import { OauthCallbackComponent } from './oauth-callback.component';
 
-describe('AuthFeComponent', () => {
-  let component: AuthFeComponent;
-  let fixture: ComponentFixture<AuthFeComponent>;
+describe('OauthCallbackComponent', () => {
+  let component: OauthCallbackComponent;
+  let fixture: ComponentFixture<OauthCallbackComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthFeComponent],
+      imports: [OauthCallbackComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AuthFeComponent);
+    fixture = TestBed.createComponent(OauthCallbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
