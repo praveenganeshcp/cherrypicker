@@ -33,7 +33,7 @@ export class CreateCherrypickRequestUsecase {
         private appConfiguration: ConfigType<typeof appConfig>,
     ) {}
 
-    async execute(input: CreateCherrypickRequestUsecaseInput): Promise<void> {
+    async execute(input: CreateCherrypickRequestUsecaseInput): Promise<{id: ObjectId}> {
         this.logger.log(`Creating new cherrypick request titled ${input.title} in repo ${input.repoId} with ${input.commits.length} commits`)
         const createdRequest: CherrypickRequest = await this.createRequest(input);
         this.logger.log(`New cherrypick request created ${createdRequest._id.toString()}`);
@@ -47,12 +47,13 @@ export class CreateCherrypickRequestUsecase {
             text: `${input.createdBy.name} has requested approval to cherrypick commits`,
             cta: {
                 label: "Approve",
-                link: `${this.appConfiguration.FE_HOST_ADDRESS}/cherrypick-requests/${createdRequest._id.toString()}/approve`,
+                link: `${this.appConfiguration.FE_HOST_ADDRESS}/app/cherrypick-requests/${createdRequest._id.toString()}/approve`,
                 copy: 'Click the button below to approve the request'
             },
             username: 'Approver',
             toEmailId: 'praveenganesh7@gmail.com'
         })
+        return {id: createdRequest._id};
     }   
 
     private async createRequest(input: CreateCherrypickRequestUsecaseInput): Promise<CherrypickRequest> {

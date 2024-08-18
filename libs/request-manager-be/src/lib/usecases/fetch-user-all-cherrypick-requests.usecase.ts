@@ -23,7 +23,16 @@ export class FetchUserAllCherrpickRequestUsecase {
                     foreignField: "requestId",
                     as: "commits"
                 }
-            }
+            },
+            {
+                $lookup: {
+                    from: "vcs_repositories",
+                    localField: "repoId",
+                    foreignField: "_id",
+                    as: "repo"
+                }
+            },
+            { $sort: { "createdOn": -1 } }
         ])
     }
 }

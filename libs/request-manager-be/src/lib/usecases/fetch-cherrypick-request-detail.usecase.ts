@@ -27,6 +27,14 @@ export class FetchCherrypickRequestDetailUsecase {
                     foreignField: "requestId",
                     as: "commits"
                 }
+            },
+            {
+                $lookup: {
+                    from: "vcs_repositories",
+                    localField: "repoId",
+                    foreignField: "_id",
+                    as: "repo"
+                }
             }
         ])
     }
