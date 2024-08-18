@@ -1,0 +1,9 @@
+<p>landing-page works!</p>
+<ng-container *ngIf="(isUserAuthenticated$ | async); else loginBtn">
+    <a [routerLink]="['app', 'cherrypick-requests']">Go to dashboard</a>
+
+</ng-container>
+
+<ng-template #loginBtn>
+    <a [href]="ghAuthorizeEndpoint">Login with github</a>
+</ng-template>

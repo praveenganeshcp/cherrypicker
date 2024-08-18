@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { CherrypickCommit, CherrypickRequest, CreateRequestPayload, GitCommit, VCSRepository } from "../types";
-import { Injectable } from "@angular/core";
+import { CherrypickRequest, CreateRequestPayload, GitCommit, VCSRepository } from "../types";
+import { Inject, Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 
 @Injectable({
@@ -8,12 +8,10 @@ import { map, Observable } from "rxjs";
 })
 export class CherrypickRequestsManagerService {
     constructor(
-        private readonly http: HttpClient
+        private readonly http: HttpClient,
+        @Inject('API_URL') 
+        private apiUrl: string
     ) {}
-
-    private get apiUrl(): string {
-        return `http://localhost:3000/api`
-    }
 
     fetchAllRequests() {
         return this.http.get<CherrypickRequest[]>(`${this.apiUrl}/requests-manager/requests`, {

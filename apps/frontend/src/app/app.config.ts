@@ -11,6 +11,7 @@ import { cherrypickRequestsDashboardReducer } from "./modules/request-manager/st
 import { CherrypickRequestsDashboardEffects } from './modules/request-manager/store/effects';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
+import { environment } from '../environments/environment.dev';
 
 
 export const appConfig: ApplicationConfig = {
@@ -27,6 +28,10 @@ export const appConfig: ApplicationConfig = {
       HttpClientModule,
       StoreDevtoolsModule.instrument(),
       BrowserAnimationsModule
-    ]), provideAnimationsAsync()
+    ]), provideAnimationsAsync(),
+    {
+      provide: 'API_URL',
+      useValue: environment.apiUrl
+    }
   ],
 };
