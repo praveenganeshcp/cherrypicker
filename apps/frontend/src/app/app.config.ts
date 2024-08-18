@@ -7,6 +7,8 @@ import { AuthEffects } from './modules/auth/store/effects';
 import { provideStore, StoreModule } from '@ngrx/store';
 import { authReducer } from './modules/auth/store/reducer';
 import { HttpClientModule } from '@angular/common/http';
+import { cherrypickRequestsDashboardReducer } from "./modules/request-manager/store/reducer";
+import { CherrypickRequestsDashboardEffects } from './modules/request-manager/store/effects';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 
@@ -17,9 +19,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     provideStore(),
     importProvidersFrom([
-      EffectsModule.forRoot([AuthEffects]),
+      EffectsModule.forRoot([AuthEffects, CherrypickRequestsDashboardEffects]),
       StoreModule.forRoot({
         userProfile: authReducer,
+        dashboard: cherrypickRequestsDashboardReducer
       }),
       HttpClientModule,
       StoreDevtoolsModule.instrument(),
