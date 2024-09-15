@@ -1,12 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CherrypickRequest, CherrypickRequestsManagerService, GitCommit, PreviewRequestComponent } from '@cherrypicker/request-manager-fe';
+import { CherrypickStatus } from '@cherrypicker/request-manager-core';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'cp-cherrypick-request-detail',
   standalone: true,
-  imports: [PreviewRequestComponent, NgIf],
+  imports: [PreviewRequestComponent, NgIf, MatButtonModule],
   templateUrl: './cherrypick-request-detail.component.html',
   styleUrl: './cherrypick-request-detail.component.scss',
 })
@@ -37,6 +39,10 @@ export class CherrypickRequestDetailComponent implements OnInit {
         message: commit.message
       }
     }) : []
+  }
+
+  get showReRunButton() {
+    return this.requestDetail ? this.requestDetail.status === CherrypickStatus.Conflict : false;
   }
 
   get repoName() {

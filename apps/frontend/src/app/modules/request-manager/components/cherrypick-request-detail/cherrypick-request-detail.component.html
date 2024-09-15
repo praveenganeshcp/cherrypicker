@@ -8,4 +8,7 @@
         [status]="requestDetail.status"
     >
     </rm-preview-request>
+    <div *ngIf="showReRunButton" style="width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 3rem;">
+        <button mat-flat-button>Rerun with skip</button>
+    </div>
 </div>

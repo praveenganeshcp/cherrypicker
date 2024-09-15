@@ -1,9 +1,17 @@
-<p>landing-page works!</p>
-<ng-container *ngIf="(isUserAuthenticated$ | async); else loginBtn">
-    <a [routerLink]="['app', 'cherrypick-requests']">Go to dashboard</a>
-
-</ng-container>
-
-<ng-template #loginBtn>
-    <a [href]="ghAuthorizeEndpoint">Login with Github</a>
-</ng-template>
+  <main class="landing-page">
+    <header class="header">
+        <div *ngIf="(isUserAuthenticated$ | async) === false; else authUser" class="login-section">
+            <a [href]="ghAuthorizeEndpoint">Login with Github</a>
+        </div>
+        <ng-template #authUser>
+              <p>Welcome, {{ (userProfile$ | async)?.name }}!</p>
+              <a style="margin-left: 1rem;" [routerLink]="['app', 'cherrypick-requests']" class="dashboard-link">Go to Dashboard</a>
+        </ng-template>
+    </header>
+    <section class="banner">
+        <div class="banner-content">
+            <h1>CherryPickr</h1>
+            <p>Cherry-pick commits at ease</p>
+          </div>
+    </section>
+  </main>

@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { UserProfileState } from "./state";
-import { errorInFetchingUserProfileAction, fetchUserProfileAction, userProfileFetchedAction } from "./actions";
+import { errorInFetchingUserProfileAction, fetchUserProfileAction, githubAccountAuthorizedAction, userProfileFetchedAction } from "./actions";
 
 const DEFAULT_STATE: UserProfileState = {
     isLoading: false,
@@ -22,6 +22,11 @@ export const authReducer = createReducer(DEFAULT_STATE,
     on(errorInFetchingUserProfileAction, (state, { error }) => ({
         error,
         data: null,
+        isLoading: false
+    })),
+    on(githubAccountAuthorizedAction, (state, { profile }) => ({
+        error: '',
+        data: profile,
         isLoading: false
     }))
 )
