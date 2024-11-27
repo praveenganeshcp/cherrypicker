@@ -22,7 +22,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new HttpExceptionFilter());
   app.enableCors({
-    origin: "*",
+    origin: [applicationConfig.FE_HOST_ADDRESS],
     credentials: true,
   })
   app.setGlobalPrefix(globalPrefix);
