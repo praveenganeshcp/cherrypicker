@@ -9,6 +9,5 @@ export class CreateCherrypickRequestDTO {
 }
 
 export class AddVCSRepoDTO {
-    id: number;
     name: string;
 }

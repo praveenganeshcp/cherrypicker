@@ -15,10 +15,16 @@ class EnvironmentVariables {
   PORT!: number;
 
   @IsString()
-  DB_URL!: string;
+  DB_HOST!: string;
 
   @IsString()
   DB_NAME!: string;
+
+  @IsString()
+  DB_AUTH_PASSWORD!: string;
+
+  @IsString()
+  DB_AUTH_USERNAME!: string;
 
   @IsString()
   JWT_SECRET!: string;

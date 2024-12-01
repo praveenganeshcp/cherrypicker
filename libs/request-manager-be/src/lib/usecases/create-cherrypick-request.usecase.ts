@@ -68,7 +68,7 @@ export class CreateCherrypickRequestUsecase {
         newCherrypickRequest.status = CherrypickStatus.WaitingForApproval;
         newCherrypickRequest.completedOn = null;
         newCherrypickRequest.createdBy = input.createdBy.subjectId;
-        newCherrypickRequest.notesForApprover = input.notesForApprover;
+        newCherrypickRequest.notesForApprover = input.notesForApprover ?? '';
 
         return this.cherrypickRequestRepo.save(newCherrypickRequest);
     }

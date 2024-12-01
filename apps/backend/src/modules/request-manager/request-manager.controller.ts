@@ -32,7 +32,6 @@ export class RequestManagerController {
     @Post('vcs-repo')
     addVcsRepo(@Body() addRepoDTO: AddVCSRepoDTO) {
         return this.addVCSRepoUsecase.execute({
-            id: addRepoDTO.id,
             name: addRepoDTO.name
         })
     }

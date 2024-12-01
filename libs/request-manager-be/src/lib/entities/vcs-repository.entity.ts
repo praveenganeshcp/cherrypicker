@@ -8,7 +8,4 @@ export class VCSRepositoryEntity {
 
     @Column()
     name!: string;
-
-    @Column()
-    repoId!: number;
 }

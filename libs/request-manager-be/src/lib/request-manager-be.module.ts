@@ -9,8 +9,19 @@ import { ApproveAndInitiateCherrypickUsecase } from './usecases/approve-and-init
 import { UpdateCherrypickRequestStatusUsecase } from './usecases/update-cherrypick-request-status.usecase';
 import { NotificationsBeModule } from '@cherrypick/notifications-be';
 import { GetAllVCSRepoUsecase } from './usecases/get-all-vcs-repo.usecase';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CherrypickCommitEntity } from './entities/cherrypick-commit.entity';
+import { CherrypickRequestEntity } from './entities/cherrypick-request.entity';
+import { VCSRepositoryEntity } from './entities/vcs-repository.entity';
 @Module({
-  imports: [GithubApiModule, NotificationsBeModule],
+  imports: [
+    GithubApiModule, NotificationsBeModule,
+    TypeOrmModule.forFeature([
+      CherrypickCommitEntity,
+      CherrypickRequestEntity,
+      VCSRepositoryEntity
+    ])
+  ],
   providers: [
     FetchCommitsInRepoUsecase,
     CreateCherrypickRequestUsecase,
@@ -29,7 +40,8 @@ import { GetAllVCSRepoUsecase } from './usecases/get-all-vcs-repo.usecase';
     FetchUserAllCherrpickRequestUsecase,
     ApproveAndInitiateCherrypickUsecase,
     UpdateCherrypickRequestStatusUsecase,
-    GetAllVCSRepoUsecase
+    GetAllVCSRepoUsecase,
+    TypeOrmModule
   ]
 })
 export class RequestManagerBeModule {}

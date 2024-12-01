@@ -4,7 +4,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 export interface AddVSCRepoUsecaseInput {
-    id: number;
     name: string;
 }
 
@@ -22,7 +21,6 @@ export class AddVCSRepoUsecase {
         this.logger.log(`Adding new repo named ${input.name}`);
         const repo: VCSRepositoryEntity = new VCSRepositoryEntity();
         repo.name = input.name;
-        repo.repoId = input.id
         return this.vcsRepoDataStore.save(repo)
     }
 }

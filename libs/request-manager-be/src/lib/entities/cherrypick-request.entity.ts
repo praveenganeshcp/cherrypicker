@@ -16,13 +16,18 @@ export class CherrypickRequestEntity {
     @Column()
     createdBy!: number;
 
-    @Column()
+    @Column({
+        type: 'enum',
+        enum: CherrypickStatus, 
+    })
     status!: CherrypickStatus;
 
     @Column()
     targetBranch!: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     completedOn!: Date | null;
 
     @Column()

@@ -1,7 +1,7 @@
 import { CherrypickStatus } from "@cherrypicker/request-manager-core";
 
 export interface CherrypickCommit {
-    _id: string;
+    id: number;
     sha: string;
     url: string;
     message: string;
@@ -17,7 +17,7 @@ export interface GitCommit {
 }
 
 export interface CherrypickRequest {
-    _id: string;
+    id: number;
     title: string;
     createdOn: Date;
     createdBy: number;
@@ -32,7 +32,6 @@ export interface CherrypickRequest {
 }
 
 export interface VCSRepository {
-    _id: string;
     name: string;
     id: number;
 }
