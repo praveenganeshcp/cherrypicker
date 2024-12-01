@@ -1,6 +1,8 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { CherrypickRequestRepository } from "../repository/cherrypick-request.repository";
 import { CherrypickRequestWithCommits } from "../types";
+import { InjectRepository } from "@nestjs/typeorm";
+import { CherrypickRequestEntity } from "../entities/cherrypick-request.entity";
+import { Repository } from "typeorm";
 
 
 @Injectable()
@@ -9,7 +11,8 @@ export class FetchUserAllCherrpickRequestUsecase {
     private readonly logger = new Logger(FetchUserAllCherrpickRequestUsecase.name);
 
     constructor(
-        private readonly cherrypickRequestRepo: CherrypickRequestRepository
+        @InjectRepository(CherrypickRequestEntity)
+        private readonly cherrypickRequestRepo: Repository<CherrypickRequestEntity>
     ) {}
 
     async execute(createdBy: number): Promise<CherrypickRequestWithCommits[]> {

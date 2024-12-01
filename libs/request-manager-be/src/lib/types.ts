@@ -1,6 +1,6 @@
-import { CherrypickCommit } from "./entities/cherrypick-commit";
-import { CherrypickRequest } from "./entities/cherrypick-request";
+import { CherrypickCommitEntity } from "./entities/cherrypick-commit.entity";
+import { CherrypickRequestEntity } from "./entities/cherrypick-request.entity";
 
-export interface CherrypickRequestWithCommits extends CherrypickRequest {
-    commits: CherrypickCommit[]
+export interface CherrypickRequestWithCommits extends CherrypickRequestEntity {
+    commits: CherrypickCommitEntity[]
 }

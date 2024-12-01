@@ -1,6 +1,8 @@
 import { ObjectId } from "mongodb"
-import { CherrypickRequestRepository } from "../repository/cherrypick-request.repository";
 import { Injectable, Logger } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { CherrypickRequestEntity } from "../entities/cherrypick-request.entity";
+import { Repository } from "typeorm";
 
 export interface FetchCherrypickRequestDetailUsecaseInput {
     id: ObjectId;
@@ -13,7 +15,8 @@ export class FetchCherrypickRequestDetailUsecase {
     private readonly logger = new Logger(FetchCherrypickRequestDetailUsecase.name);
 
     constructor(
-        private readonly cherrypickRequestRepo: CherrypickRequestRepository
+        @InjectRepository(CherrypickRequestEntity)
+        private readonly cherrypickRequestRepo: Repository<CherrypickRequestEntity>
     ) {}
 
     async execute(input: FetchCherrypickRequestDetailUsecaseInput) {
