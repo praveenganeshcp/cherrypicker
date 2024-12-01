@@ -20,8 +20,8 @@ export class FetchUserAllCherrpickRequestUsecase {
         .createQueryBuilder('request')
         .where('request.createdBy = :createdBy', {createdBy})
         .leftJoinAndSelect('request.commits', 'commit') // Join commits related to the request
+        .leftJoinAndSelect('request.repository', 'repo') // Join commits related to the request
         .getMany();
-
         return requestsWithCommits;
     }
 }

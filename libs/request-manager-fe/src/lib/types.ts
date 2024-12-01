@@ -24,9 +24,7 @@ export interface CherrypickRequest {
     status: CherrypickStatus;
     targetBranch: string;
     completedOn: Date | null;
-    repo: [{
-        name: string;
-    }];
+    repository: VCSRepository;
     notesForApprover: string
     commits: CherrypickCommit[]
 }

@@ -1,6 +1,7 @@
 import { CherrypickStatus } from "@cherrypicker/request-manager-core";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CherrypickCommitEntity } from "./cherrypick-commit.entity";
+import { VCSRepositoryEntity } from "./vcs-repository.entity";
 
 @Entity()
 export class CherrypickRequestEntity {
@@ -33,6 +34,10 @@ export class CherrypickRequestEntity {
 
     @Column()
     repoId!: number;
+
+    @ManyToOne(() => VCSRepositoryEntity, repo => repo.cherrypickRequests)  // Define the relation to VCSRepositoryEntity
+    @JoinColumn({ name: 'repoId' })  // Specify the column name that holds the repo ID
+    repository!: VCSRepositoryEntity;  // Use the VCSRepositoryEntity type here
 
     @Column()
     notesForApprover!: string

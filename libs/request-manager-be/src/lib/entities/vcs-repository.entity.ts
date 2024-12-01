@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CherrypickRequestEntity } from "./cherrypick-request.entity";
 
 @Entity()
 export class VCSRepositoryEntity {
@@ -8,4 +9,7 @@ export class VCSRepositoryEntity {
 
     @Column()
     name!: string;
+
+    @OneToMany(() => CherrypickRequestEntity, request => request.repository)  // Define the relation to CherrypickRequestEntity
+    cherrypickRequests!: CherrypickRequestEntity[];  // Use CherrypickRequestEntity type here
 }

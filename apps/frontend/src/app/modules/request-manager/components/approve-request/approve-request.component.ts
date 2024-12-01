@@ -45,7 +45,7 @@ export class ApproveRequestComponent {
   }
 
   get repoName() {
-    return this.requestDetail?.repo?.[0].name ?? ''
+    return this.requestDetail?.repository.name ?? ''
   }
 
   handleApproveRequest() {
