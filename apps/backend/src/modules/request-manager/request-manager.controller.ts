@@ -1,8 +1,7 @@
-import { AuthUser, User } from "@cherrypicker/auth-be";
+import { AuthUser, UserEntity } from "@cherrypicker/auth-be";
 import { AddVCSRepoUsecase, ApproveAndInitiateCherrypickUsecase, CreateCherrypickRequestUsecase, FetchCherrypickRequestDetailUsecase, FetchCommitsInRepoUsecase, FetchUserAllCherrpickRequestUsecase, GetAllVCSRepoUsecase, UpdateCherrypickRequestStatusUsecase } from "@cherrypicker/request-manager-be";
 import { Body, Controller, Get, Logger, Param, Patch, Post } from "@nestjs/common";
 import { AddVCSRepoDTO, CreateCherrypickRequestDTO } from "./request-manager-dto";
-import { ObjectId } from "mongodb";
 
 @Controller('requests-manager')
 export class RequestManagerController {
@@ -21,7 +20,7 @@ export class RequestManagerController {
     ) {}
 
     @Get('repo/:repoName/commits')
-    fetchRepoCommits(@Param('repoName') repoName: string, @AuthUser() user: User) {
+    fetchRepoCommits(@Param('repoName') repoName: string, @AuthUser() user: UserEntity) {
         this.logger.log(`Fetching commits in ${user.subjectLogin}/${repoName} repo`);
         return this.fetchCommitsInRepoUsecase.execute({
             ghLogin: user.subjectLogin,
@@ -33,17 +32,16 @@ export class RequestManagerController {
     @Post('vcs-repo')
     addVcsRepo(@Body() addRepoDTO: AddVCSRepoDTO) {
         return this.addVCSRepoUsecase.execute({
-            id: addRepoDTO.id,
             name: addRepoDTO.name
         })
     }
 
     @Post('requests')
-    createCherrypickRequest(@Body() createCherrypickRequestDTO: CreateCherrypickRequestDTO, @AuthUser() user: User) {
+    createCherrypickRequest(@Body() createCherrypickRequestDTO: CreateCherrypickRequestDTO, @AuthUser() user: UserEntity) {
         return this.createCherrypickRequestUsecase.execute({
             title: createCherrypickRequestDTO.title,
             targetBranch: createCherrypickRequestDTO.targetBranch,
-            repoId: new ObjectId(createCherrypickRequestDTO.repoId),
+            repoId: createCherrypickRequestDTO.repoId,
             commits: createCherrypickRequestDTO.commits,
             notesForApprover: createCherrypickRequestDTO.notesForApprover,
             createdBy: user
@@ -51,7 +49,7 @@ export class RequestManagerController {
     }
 
     @Get('requests')
-    fetchUserAllCherrypickRequests(@AuthUser() user: User) {
+    fetchUserAllCherrypickRequests(@AuthUser() user: UserEntity) {
         return this.fetchUserAllCherrypickRequestUsecase.execute(user.subjectId);
     }
 
@@ -61,18 +59,18 @@ export class RequestManagerController {
     }
 
     @Patch('requests/:requestId/approve')
-    approveAndInitiateCherrypick(@AuthUser() user: User, @Param('requestId') requestId: string) {
+    approveAndInitiateCherrypick(@AuthUser() user: UserEntity, @Param('requestId') requestId: string) {
         return this.approveAndInitiateCherrypickUsecase.execute({
-            requestId: new ObjectId(requestId),
+            requestId: parseInt(requestId, 10),
             createdBy: user.subjectId,
             accessToken: user.accessToken
         })
     }
 
     @Get('requests/:id')
-    fetchRequestDetails(@Param('id') requestId: string, @AuthUser() user: User) {
+    fetchRequestDetails(@Param('id') requestId: string, @AuthUser() user: UserEntity) {
         return this.fetchCherrypickRequestDetailsUsecase.execute({
-            id: new ObjectId(requestId),
+            id: parseInt(requestId, 10),
             createdBy: user.subjectId
         })
     }
@@ -80,7 +78,7 @@ export class RequestManagerController {
     @Patch('requests/:requestId/status')
     updateStatus(@Body('isSuccess') isSuccess: boolean, @Param('requestId') requestId: string) {
         return this.updateCherrypickStatusUsecase.execute({
-            requestId: new ObjectId(requestId),
+            requestId: parseInt(requestId, 10),
             isSuccess
         })
     }

@@ -43,7 +43,7 @@ export class CreateCherrypickRequestComponent implements OnInit {
   }
 
   protected readonly cherrypickRequestForm = this.formBuilder.group({
-    repo: this.formBuilder.control({name: '', _id: ''}, [Validators.required]),
+    repo: this.formBuilder.control({name: '', id: null}, [Validators.required]),
     targetBranch: this.formBuilder.control('', [Validators.required]),
     commits: this.formBuilder.control([] as GitCommit[], [Validators.required]),
     title: this.formBuilder.control('', [Validators.required])
@@ -69,7 +69,7 @@ export class CreateCherrypickRequestComponent implements OnInit {
       title: formValue.title ?? '',
       targetBranch: formValue.targetBranch ?? '',
       commits: formValue.commits ?? [],
-      repoId: formValue.repo?._id ?? ''
+      repoId: formValue.repo?.id ?? ''
     }).subscribe(response => {
       this.router.navigate(['app', 'cherrypick-requests', response.id])
     })

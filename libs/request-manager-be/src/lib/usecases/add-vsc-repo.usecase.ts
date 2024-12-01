@@ -1,9 +1,9 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { VCSRepository } from "../entities/vcs-repository";
-import { VscRepositoryDataStore } from "../repository/vsc.repository";
+import { VCSRepositoryEntity } from "../entities/vcs-repository.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
 export interface AddVSCRepoUsecaseInput {
-    id: number;
     name: string;
 }
 
@@ -13,14 +13,14 @@ export class AddVCSRepoUsecase {
     private readonly logger = new Logger(AddVCSRepoUsecase.name);
 
     constructor(
-        private readonly vcsRepoDataStore: VscRepositoryDataStore
+        @InjectRepository(VCSRepositoryEntity)
+        private readonly vcsRepoDataStore: Repository<VCSRepositoryEntity>
     ) {}
 
-    async execute(input: AddVSCRepoUsecaseInput): Promise<VCSRepository> {
+    async execute(input: AddVSCRepoUsecaseInput): Promise<VCSRepositoryEntity> {
         this.logger.log(`Adding new repo named ${input.name}`);
-        return this.vcsRepoDataStore.save({
-            name: input.name,
-            id: input.id
-        })
+        const repo: VCSRepositoryEntity = new VCSRepositoryEntity();
+        repo.name = input.name;
+        return this.vcsRepoDataStore.save(repo)
     }
 }

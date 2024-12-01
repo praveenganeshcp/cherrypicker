@@ -2,7 +2,7 @@
 
     <ng-container matColumnDef="repository">
       <th mat-header-cell *matHeaderCellDef> Repository </th>
-      <td mat-cell *matCellDef="let element"> {{ element.repoName }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.repository.name }} </td>
     </ng-container>
   
     <ng-container matColumnDef="title">
@@ -28,7 +28,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element"> 
-          <a [routerLink]="['/app', 'cherrypick-requests', element._id]">See details</a>
+          <a [routerLink]="['/app', 'cherrypick-requests', element.id]">See details</a>
         </td>
       </ng-container>
   

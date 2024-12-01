@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
-import { UserRepository } from './repository/user.repository';
 import { AuthorizeUsecase } from './usecases/authorize.usecase';
-import { RepositoryModule } from '@cherrypicker/repository';
 import { JWTService } from './services/jwt.service';
 import { AuthenticationMiddleware } from './services/authentication.middleware';
 import { GithubApiModule } from '@cherrypicker/github-api';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from './entities/user.entity';
 
 @Module({
-  imports: [GithubApiModule, RepositoryModule],
-  controllers: [],
-  providers: [UserRepository, AuthorizeUsecase, JWTService, AuthenticationMiddleware],
-  exports: [UserRepository, AuthorizeUsecase, JWTService, AuthenticationMiddleware],
+  imports: [GithubApiModule,  TypeOrmModule.forFeature([UserEntity])],
+  providers: [AuthorizeUsecase, JWTService, AuthenticationMiddleware],
+  exports: [AuthorizeUsecase, JWTService, AuthenticationMiddleware, TypeOrmModule],
 })
 export class AuthBeModule {}

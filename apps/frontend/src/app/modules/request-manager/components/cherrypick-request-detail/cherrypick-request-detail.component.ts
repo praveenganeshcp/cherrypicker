@@ -46,6 +46,6 @@ export class CherrypickRequestDetailComponent implements OnInit {
   }
 
   get repoName() {
-    return this.requestDetail?.repo?.[0].name ?? ''
+    return this.requestDetail?.repository.name ?? ''
   }
 }

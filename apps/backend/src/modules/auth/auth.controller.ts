@@ -1,4 +1,4 @@
-import { AuthorizeUsecase, AuthUser, JWTService, User } from "@cherrypicker/auth-be";
+import { AuthorizeUsecase, AuthUser, JWTService, UserEntity } from "@cherrypicker/auth-be";
 import { Body, Controller, Get, Logger, Post, Res } from "@nestjs/common";
 import { Response } from "express";
 import { AuthenticatedUserResponse } from "./types";
@@ -16,7 +16,7 @@ export class AuthController {
     @Post('authorize')
     async authorizeUser(@Body('exchangeCode') exchangeCode: string, @Res({passthrough: true}) response: Response) {
         this.logger.log('Authorizing github user');
-        const authenticatedUser: User = await this.authorizeUsecase.execute(exchangeCode);
+        const authenticatedUser: UserEntity = await this.authorizeUsecase.execute(exchangeCode);
         this.logger.log(`Authorization passed successfully for ${authenticatedUser.name}`);
         const userResponse: AuthenticatedUserResponse = {
             name: authenticatedUser.name,
@@ -26,7 +26,7 @@ export class AuthController {
     }
 
     @Get('profile')
-    fetchProfile(@AuthUser() user: User): AuthenticatedUserResponse {
+    fetchProfile(@AuthUser() user: UserEntity): AuthenticatedUserResponse {
         this.logger.log(`Fetched user profile for ${user.name}`);
         return {
             name: user.name,

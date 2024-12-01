@@ -36,9 +36,9 @@ export class CherrypickRequestsManagerService {
     }
 
     fetchRequestDetail(id: string): Observable<CherrypickRequest> {
-        return this.http.get<[CherrypickRequest]>(`${this.apiUrl}/requests-manager/requests/${id}`, {
+        return this.http.get<CherrypickRequest>(`${this.apiUrl}/requests-manager/requests/${id}`, {
             withCredentials: true
-        }).pipe(map(details => details[0]));
+        }).pipe(map(details => details));
     }
 
     approveRequest(id: string): Observable<void> {

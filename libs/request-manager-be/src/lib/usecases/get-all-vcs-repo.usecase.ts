@@ -1,15 +1,17 @@
 import { Injectable } from "@nestjs/common";
-import { VCSRepository } from "../entities/vcs-repository";
-import { VscRepositoryDataStore } from "../repository/vsc.repository";
+import { InjectRepository } from "@nestjs/typeorm";
+import { VCSRepositoryEntity } from "../entities/vcs-repository.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class GetAllVCSRepoUsecase {
 
     constructor(
-        private readonly vcsRepoDataStore: VscRepositoryDataStore
+        @InjectRepository(VCSRepositoryEntity)
+        private readonly vcsRepoDataStore: Repository<VCSRepositoryEntity>
     ) {}
 
-    async execute(): Promise<VCSRepository[]> {
-        return this.vcsRepoDataStore.findAll({});
+    async execute(): Promise<VCSRepositoryEntity[]> {
+        return this.vcsRepoDataStore.find();
     }
 }

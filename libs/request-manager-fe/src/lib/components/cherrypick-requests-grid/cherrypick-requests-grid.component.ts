@@ -6,7 +6,6 @@ import { DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 interface CherrypickRequestVM extends CherrypickRequest {
-  repoName: string;
 }
 
 @Component({
@@ -24,10 +23,7 @@ export class CherrypickRequestsGridComponent {
 
   @Input() 
   set cherrypickRequests(data: CherrypickRequest[]) {
-    this._cherrypickRequests = data.map(request => ({
-      ...request,
-      repoName: request.repo[0].name
-    }))
+    this._cherrypickRequests = data;
   }
 
   get cherrypickRequests() {
