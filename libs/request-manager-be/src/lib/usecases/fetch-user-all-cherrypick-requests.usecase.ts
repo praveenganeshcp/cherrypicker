@@ -16,26 +16,27 @@ export class FetchUserAllCherrpickRequestUsecase {
     ) {}
 
     async execute(createdBy: number): Promise<CherrypickRequestWithCommits[]> {
-        this.logger.log(`fetching user ${createdBy} all cherrypick requests`);
-        return this.cherrypickRequestRepo.aggregate([
-            { $match: { createdBy } },
-            {
-                $lookup: {
-                    from: "cherrypick_commits",
-                    localField: "_id",
-                    foreignField: "requestId",
-                    as: "commits"
-                }
-            },
-            {
-                $lookup: {
-                    from: "vcs_repositories",
-                    localField: "repoId",
-                    foreignField: "_id",
-                    as: "repo"
-                }
-            },
-            { $sort: { "createdOn": -1 } }
-        ])
+        return []
+        // this.logger.log(`fetching user ${createdBy} all cherrypick requests`);
+        // return this.cherrypickRequestRepo.aggregate([
+        //     { $match: { createdBy } },
+        //     {
+        //         $lookup: {
+        //             from: "cherrypick_commits",
+        //             localField: "_id",
+        //             foreignField: "requestId",
+        //             as: "commits"
+        //         }
+        //     },
+        //     {
+        //         $lookup: {
+        //             from: "vcs_repositories",
+        //             localField: "repoId",
+        //             foreignField: "_id",
+        //             as: "repo"
+        //         }
+        //     },
+        //     { $sort: { "createdOn": -1 } }
+        // ])
     }
 }

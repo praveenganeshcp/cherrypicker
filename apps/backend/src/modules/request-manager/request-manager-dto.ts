@@ -4,7 +4,7 @@ export class CreateCherrypickRequestDTO {
     title: string;
     commits: GitCommit[]
     targetBranch: string;
-    repoId: string;
+    repoId: number;
     notesForApprover: string;
 }
 

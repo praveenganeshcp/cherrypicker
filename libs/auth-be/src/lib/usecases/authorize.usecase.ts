@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { GithubService, GithubUser } from "@cherrypicker/github-api";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "../entities/user.entity";

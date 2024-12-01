@@ -1,9 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CherrypickRequestRepository } from './repository/cherrypick-request.repository';
-import { CherrypickCommitRepository } from './repository/cherrypick-commit.repository';
-import { VscRepositoryDataStore } from './repository/vsc.repository';
 import { FetchCommitsInRepoUsecase } from './usecases/fetch-commits-in-repo.usecase';
-import { RepositoryModule } from '@cherrypicker/repository';
 import { GithubApiModule } from '@cherrypicker/github-api';
 import { CreateCherrypickRequestUsecase } from './usecases/create-cherrypick-request.usecase';
 import { AddVCSRepoUsecase } from './usecases/add-vsc-repo.usecase';
@@ -14,11 +10,8 @@ import { UpdateCherrypickRequestStatusUsecase } from './usecases/update-cherrypi
 import { NotificationsBeModule } from '@cherrypick/notifications-be';
 import { GetAllVCSRepoUsecase } from './usecases/get-all-vcs-repo.usecase';
 @Module({
-  imports: [RepositoryModule, GithubApiModule, NotificationsBeModule],
+  imports: [GithubApiModule, NotificationsBeModule],
   providers: [
-    CherrypickRequestRepository,
-    CherrypickCommitRepository,
-    VscRepositoryDataStore,
     FetchCommitsInRepoUsecase,
     CreateCherrypickRequestUsecase,
     AddVCSRepoUsecase,
