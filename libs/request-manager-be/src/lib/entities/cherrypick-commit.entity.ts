@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { CherrypickRequestEntity } from "./cherrypick-request.entity";
 
 @Entity()
 export class CherrypickCommitEntity {
@@ -20,4 +21,7 @@ export class CherrypickCommitEntity {
 
     @Column()
     requestId!: number;
+
+    @ManyToOne(() => CherrypickRequestEntity, request => request.commits)
+    request!: CherrypickRequestEntity;
 }

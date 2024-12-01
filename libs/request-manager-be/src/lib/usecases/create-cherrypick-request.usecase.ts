@@ -68,6 +68,7 @@ export class CreateCherrypickRequestUsecase {
         newCherrypickRequest.status = CherrypickStatus.WaitingForApproval;
         newCherrypickRequest.completedOn = null;
         newCherrypickRequest.createdBy = input.createdBy.subjectId;
+        newCherrypickRequest.commits = [];
         newCherrypickRequest.notesForApprover = input.notesForApprover ?? '';
 
         return this.cherrypickRequestRepo.save(newCherrypickRequest);
@@ -80,7 +81,8 @@ export class CreateCherrypickRequestUsecase {
                 message: commit.message,
                 url: commit.htmlUrl,
                 commitedOn: commit.timestamp,
-                requestId: cherrypickRequest.id
+                requestId: cherrypickRequest.id,
+                request: cherrypickRequest
             }
             return requestCommit;
         })

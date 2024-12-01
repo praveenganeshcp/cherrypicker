@@ -1,5 +1,6 @@
 import { CherrypickStatus } from "@cherrypicker/request-manager-core";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CherrypickCommitEntity } from "./cherrypick-commit.entity";
 
 @Entity()
 export class CherrypickRequestEntity {
@@ -35,4 +36,7 @@ export class CherrypickRequestEntity {
 
     @Column()
     notesForApprover!: string
+
+    @OneToMany(() => CherrypickCommitEntity, commit => commit.request)
+    commits!: CherrypickCommitEntity[];
 }
