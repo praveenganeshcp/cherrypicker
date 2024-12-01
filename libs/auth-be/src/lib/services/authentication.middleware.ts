@@ -2,16 +2,18 @@ import { Injectable, NestMiddleware, Logger, HttpException } from '@nestjs/commo
 import { Response } from 'express';
 import { JWTService } from '../services/jwt.service';
 import { JsonWebTokenError } from 'jsonwebtoken';
-import { User } from '../entities/user';
-import { UserRepository } from '../repository/user.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserEntity } from '../entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthenticationMiddleware implements NestMiddleware {
   private logger = new Logger(AuthenticationMiddleware.name);
 
   constructor(
-    private readonly jwtService: JWTService,
-    private readonly userRepository: UserRepository
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+    private readonly jwtService: JWTService
   ) {}
 
   // TODO: use express req type
@@ -30,7 +32,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
     }
   }
 
-  private async fetchUserDetails(jwt: string): Promise<User> {
+  private async fetchUserDetails(jwt: string): Promise<UserEntity> {
     if (!jwt) {
       throw new HttpException('Token not found in request', 401);
     }
@@ -38,7 +40,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
     if (!jwtPayload) {
       throw new HttpException('Invalid or token expired', 401);
     }
-    const user = await this.userRepository.findOne({
+    const user = await this.userRepository.findOneBy({
         subjectId: parseInt(jwtPayload.sub ?? '', 10)
     })
     if (!user) {
