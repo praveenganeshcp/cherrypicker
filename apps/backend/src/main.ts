@@ -3,18 +3,18 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import cookieParser from 'cookie-parser';
-import { AppModule } from './app/app.module';
-import { HttpExceptionFilter } from './modules/commons/exception-filter';
-import { ConfigType } from '@nestjs/config';
-import { appConfig } from '@cherrypicker/config-be';
+import { Logger } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import cookieParser from "cookie-parser";
+import { AppModule } from "./app/app.module";
+import { HttpExceptionFilter } from "./modules/commons/exception-filter";
+import { ConfigType } from "@nestjs/config";
+import { appConfig } from "@cherrypicker/config-be";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
-  const globalPrefix = 'api';
+  const globalPrefix = "api";
 
   const applicationConfig: ConfigType<typeof appConfig> = app.get(
     appConfig.KEY
@@ -24,7 +24,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [applicationConfig.FE_HOST_ADDRESS],
     credentials: true,
-  })
+  });
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3000;
   await app.listen(port);

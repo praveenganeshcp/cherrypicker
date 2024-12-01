@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OauthCallbackComponent } from './oauth-callback.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { OauthCallbackComponent } from "./oauth-callback.component";
 
-describe('OauthCallbackComponent', () => {
+describe("OauthCallbackComponent", () => {
   let component: OauthCallbackComponent;
   let fixture: ComponentFixture<OauthCallbackComponent>;
 
@@ -15,7 +15,7 @@ describe('OauthCallbackComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

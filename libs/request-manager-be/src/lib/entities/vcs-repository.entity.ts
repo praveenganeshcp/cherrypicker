@@ -3,13 +3,12 @@ import { CherrypickRequestEntity } from "./cherrypick-request.entity";
 
 @Entity()
 export class VCSRepositoryEntity {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-    @PrimaryGeneratedColumn()
-    id!: number;
+  @Column()
+  name!: string;
 
-    @Column()
-    name!: string;
-
-    @OneToMany(() => CherrypickRequestEntity, request => request.repository)  // Define the relation to CherrypickRequestEntity
-    cherrypickRequests!: CherrypickRequestEntity[];  // Use CherrypickRequestEntity type here
+  @OneToMany(() => CherrypickRequestEntity, (request) => request.repository) // Define the relation to CherrypickRequestEntity
+  cherrypickRequests!: CherrypickRequestEntity[]; // Use CherrypickRequestEntity type here
 }

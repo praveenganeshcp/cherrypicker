@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppShellComponent } from './app-shell.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AppShellComponent } from "./app-shell.component";
 
-describe('AppShellComponent', () => {
+describe("AppShellComponent", () => {
   let component: AppShellComponent;
   let fixture: ComponentFixture<AppShellComponent>;
 
@@ -15,7 +15,7 @@ describe('AppShellComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

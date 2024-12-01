@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CreateCherrypickRequestComponent } from './create-cherrypick-request.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { CreateCherrypickRequestComponent } from "./create-cherrypick-request.component";
 
-describe('CreateCherrypickRequestComponent', () => {
+describe("CreateCherrypickRequestComponent", () => {
   let component: CreateCherrypickRequestComponent;
   let fixture: ComponentFixture<CreateCherrypickRequestComponent>;
 
@@ -15,7 +15,7 @@ describe('CreateCherrypickRequestComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

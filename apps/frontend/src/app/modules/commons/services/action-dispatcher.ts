@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Actions, ofType } from '@ngrx/effects';
-import { Action, ActionCreator, Store } from '@ngrx/store';
-import { Observable, Subject, map, merge, take, tap } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { Actions, ofType } from "@ngrx/effects";
+import { Action, ActionCreator, Store } from "@ngrx/store";
+import { Observable, Subject, map, merge, take, tap } from "rxjs";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class StoreActionDispatcher {
   constructor(private store: Store, private actions: Actions) {}

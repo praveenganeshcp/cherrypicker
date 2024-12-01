@@ -1,19 +1,24 @@
-<div *ngIf="loading$ | async; else dashboard" class="loader">
-    Loading...
-</div>
+<div *ngIf="loading$ | async; else dashboard" class="loader">Loading...</div>
 <ng-template #dashboard>
-    <ng-container *ngIf="allRequests$ | async as allRequests">
-
+  <ng-container *ngIf="allRequests$ | async as allRequests">
     <div class="request-dashboard" *ngIf="allRequests.length; else emptyCopy">
-        <a mat-flat-button style="align-self: flex-end;" [routerLink]="['/app', 'cherrypick-requests', 'new']">Create request</a>
-        <rm-cherrypick-requests-grid [cherrypickRequests]="allRequests"></rm-cherrypick-requests-grid>    
+      <a
+        mat-flat-button
+        style="align-self: flex-end"
+        [routerLink]="['/app', 'cherrypick-requests', 'new']"
+        >Create request</a
+      >
+      <rm-cherrypick-requests-grid
+        [cherrypickRequests]="allRequests"
+      ></rm-cherrypick-requests-grid>
     </div>
     <ng-template #emptyCopy>
-        <div class="empty-request-copy">
-                <h3>No requests created</h3>
-                <a mat-flat-button [routerLink]="['/app', 'cherrypick-requests', 'new']">Create request</a>
-        </div>
+      <div class="empty-request-copy">
+        <h3>No requests created</h3>
+        <a mat-flat-button [routerLink]="['/app', 'cherrypick-requests', 'new']"
+          >Create request</a
+        >
+      </div>
     </ng-template>
-    </ng-container>
-    
+  </ng-container>
 </ng-template>

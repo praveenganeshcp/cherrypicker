@@ -5,13 +5,12 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class GetAllVCSRepoUsecase {
+  constructor(
+    @InjectRepository(VCSRepositoryEntity)
+    private readonly vcsRepoDataStore: Repository<VCSRepositoryEntity>
+  ) {}
 
-    constructor(
-        @InjectRepository(VCSRepositoryEntity)
-        private readonly vcsRepoDataStore: Repository<VCSRepositoryEntity>
-    ) {}
-
-    async execute(): Promise<VCSRepositoryEntity[]> {
-        return this.vcsRepoDataStore.find();
-    }
+  async execute(): Promise<VCSRepositoryEntity[]> {
+    return this.vcsRepoDataStore.find();
+  }
 }

@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommitInfoComponent } from './commit-info.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { CommitInfoComponent } from "./commit-info.component";
 
-describe('CommitInfoComponent', () => {
+describe("CommitInfoComponent", () => {
   let component: CommitInfoComponent;
   let fixture: ComponentFixture<CommitInfoComponent>;
 
@@ -15,7 +15,7 @@ describe('CommitInfoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

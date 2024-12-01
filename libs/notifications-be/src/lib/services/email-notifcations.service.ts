@@ -1,8 +1,8 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
-import { Transporter } from 'nodemailer';
-import SMTPTransport = require('nodemailer/lib/smtp-transport');
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import { Transporter } from "nodemailer";
+import SMTPTransport = require("nodemailer/lib/smtp-transport");
 
-export const EMAIL_TRANSPORT = 'EMAIL_TRANSPORT';
+export const EMAIL_TRANSPORT = "EMAIL_TRANSPORT";
 
 interface SendEmailPayload {
   toEmailId: string;
@@ -11,7 +11,7 @@ interface SendEmailPayload {
   cta?: {
     label: string;
     link: string;
-    copy: string
+    copy: string;
   };
   text: string;
   title: string;
@@ -25,7 +25,7 @@ export class EmailNotificationService {
   private logger = new Logger(EmailNotificationService.name);
 
   private draftEmailMessage(
-    message: Omit<SendEmailPayload, 'toEmailId' | 'subject'>
+    message: Omit<SendEmailPayload, "toEmailId" | "subject">
   ): string {
     return `
     <!DOCTYPE html>
@@ -58,9 +58,9 @@ export class EmailNotificationService {
   `;
   }
 
-  private getCTAMessage(cta: SendEmailPayload['cta']): string {
-    if(!cta) {
-      return ''
+  private getCTAMessage(cta: SendEmailPayload["cta"]): string {
+    if (!cta) {
+      return "";
     }
     return `
     <p style="color: #555;">${cta.copy}</p>
@@ -73,7 +73,7 @@ export class EmailNotificationService {
         </td>
       </tr>
     </table>
-    `
+    `;
   }
 
   public async notify(
@@ -89,7 +89,7 @@ export class EmailNotificationService {
         text: payload.text,
         username: payload.username,
         cta: payload.cta,
-        title: payload.title
+        title: payload.title,
       }),
     });
     this.logger.log(`Email sent with code ${sendEmailResponse.response}`);

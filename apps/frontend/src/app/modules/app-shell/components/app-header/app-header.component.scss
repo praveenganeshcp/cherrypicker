@@ -1,23 +1,23 @@
 .app-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 2rem;
-    background-color: darkblue;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  background-color: darkblue;
+  color: white;
+
+  a {
     color: white;
-    
-    a {
-        color: white;
-    }
+  }
 }
 
 .avatar {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .profile-details {
-    display: flex;
-    align-items: center;
-    column-gap: 8px;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
 }

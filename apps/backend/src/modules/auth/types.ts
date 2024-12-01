@@ -1,4 +1,4 @@
 export interface AuthenticatedUserResponse {
-    name: string;
-    avatarUrl: string;
+  name: string;
+  avatarUrl: string;
 }

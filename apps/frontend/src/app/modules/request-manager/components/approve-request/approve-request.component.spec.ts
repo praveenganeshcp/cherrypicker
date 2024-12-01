@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ApproveRequestComponent } from './approve-request.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ApproveRequestComponent } from "./approve-request.component";
 
-describe('ApproveRequestComponent', () => {
+describe("ApproveRequestComponent", () => {
   let component: ApproveRequestComponent;
   let fixture: ComponentFixture<ApproveRequestComponent>;
 
@@ -15,7 +15,7 @@ describe('ApproveRequestComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,15 +1,15 @@
-import { appConfig } from '@cherrypicker/config-be';
-import { Inject, Injectable, Logger } from '@nestjs/common';
-import { ConfigType } from '@nestjs/config';
-import { verify, sign, JwtPayload, SignOptions } from 'jsonwebtoken';
+import { appConfig } from "@cherrypicker/config-be";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import { ConfigType } from "@nestjs/config";
+import { verify, sign, JwtPayload, SignOptions } from "jsonwebtoken";
 
 @Injectable()
 export class JWTService {
   private readonly jwtSecret: string;
 
-  private readonly JWT_ALGORITHM: SignOptions['algorithm'] = 'HS512';
+  private readonly JWT_ALGORITHM: SignOptions["algorithm"] = "HS512";
 
-  private readonly TOKEN_EXPIRES_IN: string = '7d';
+  private readonly TOKEN_EXPIRES_IN: string = "7d";
 
   private logger = new Logger(JWTService.name);
 

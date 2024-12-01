@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PreviewRequestComponent } from './preview-request.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { PreviewRequestComponent } from "./preview-request.component";
 
-describe('PreviewRequestComponent', () => {
+describe("PreviewRequestComponent", () => {
   let component: PreviewRequestComponent;
   let fixture: ComponentFixture<PreviewRequestComponent>;
 
@@ -15,7 +15,7 @@ describe('PreviewRequestComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

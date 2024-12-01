@@ -1,16 +1,27 @@
 <div class="preview-request">
-    <h3>{{ title }}</h3>
-    <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
-        <p><b>Repository:</b> {{ repoName }}</p> 
-        <p><b>Target branch:</b> {{ targetBranch }}</p>
-        <p *ngIf="status"><b>Status:</b> {{ status }}</p>
-    </div>
-    
+  <h3>{{ title }}</h3>
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    "
+  >
+    <p><b>Repository:</b> {{ repoName }}</p>
+    <p><b>Target branch:</b> {{ targetBranch }}</p>
+    <p *ngIf="status"><b>Status:</b> {{ status }}</p>
+  </div>
 
-    <p><b>Commits:</b></p>
-    <div class="selected-commits">
-      <ng-container *ngFor="let commit of commits">
-        <rm-commit-info [message]="commit.message" [url]="commit.htmlUrl" [sha]="commit.sha" [timestamp]="commit.timestamp"></rm-commit-info>
-      </ng-container>
-    </div>
+  <p><b>Commits:</b></p>
+  <div class="selected-commits">
+    <ng-container *ngFor="let commit of commits">
+      <rm-commit-info
+        [message]="commit.message"
+        [url]="commit.htmlUrl"
+        [sha]="commit.sha"
+        [timestamp]="commit.timestamp"
+      ></rm-commit-info>
+    </ng-container>
+  </div>
 </div>

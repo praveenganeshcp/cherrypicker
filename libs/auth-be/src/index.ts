@@ -1,4 +1,4 @@
-export * from './lib/auth-be.module';
+export * from "./lib/auth-be.module";
 export * from "./lib/usecases/authorize.usecase";
 export * from "./lib/services/jwt.service";
 export * from "./lib/services/authentication.middleware";

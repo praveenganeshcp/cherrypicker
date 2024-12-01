@@ -1,4 +1,4 @@
-export * from './lib/request-manager-be.module';
+export * from "./lib/request-manager-be.module";
 export * from "./lib/usecases/fetch-commits-in-repo.usecase";
 export * from "./lib/usecases/create-cherrypick-request.usecase";
 export * from "./lib/usecases/add-vsc-repo.usecase";

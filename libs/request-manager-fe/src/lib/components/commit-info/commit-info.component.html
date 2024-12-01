@@ -1,5 +1,7 @@
 <div class="commit-info">
-    <a [href]="url" style="margin-bottom: 8px; display: block;" target="_blank">{{ message }}</a>
-    <span> {{ timestamp | date: 'MMM d, y, h:mm:ss a' }}</span>
-    <span style="margin-left: 16px;"> {{ sha }}</span>
+  <a [href]="url" style="margin-bottom: 8px; display: block" target="_blank">{{
+    message
+  }}</a>
+  <span> {{ timestamp | date : "MMM d, y, h:mm:ss a" }}</span>
+  <span style="margin-left: 16px"> {{ sha }}</span>
 </div>

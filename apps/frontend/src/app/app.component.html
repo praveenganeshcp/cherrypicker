@@ -1,10 +1,10 @@
 <ng-container *ngIf="(isProfileLoading$ | async) === true; else routerRoutlet">
-    <div class="user-profile-loader">
-        <h1>Loading user profile...</h1>
-    </div>
+  <div class="user-profile-loader">
+    <h1>Loading user profile...</h1>
+  </div>
 </ng-container>
 <ng-template #routerRoutlet>
-    <div class="app-root">
-        <router-outlet></router-outlet>
-    </div>
+  <div class="app-root">
+    <router-outlet></router-outlet>
+  </div>
 </ng-template>

@@ -1,7 +1,10 @@
-import { Module } from '@nestjs/common';
-import { EMAIL_TRANSPORT, EmailNotificationService } from './services/email-notifcations.service';
-import { createEmailTransport } from './factories';
-import { emailconfig } from '@cherrypicker/config-be';
+import { Module } from "@nestjs/common";
+import {
+  EMAIL_TRANSPORT,
+  EmailNotificationService,
+} from "./services/email-notifcations.service";
+import { createEmailTransport } from "./factories";
+import { emailconfig } from "@cherrypicker/config-be";
 
 @Module({
   controllers: [],
@@ -11,7 +14,7 @@ import { emailconfig } from '@cherrypicker/config-be';
       useFactory: createEmailTransport,
       inject: [emailconfig.KEY],
     },
-    EmailNotificationService
+    EmailNotificationService,
   ],
   exports: [EmailNotificationService],
 })

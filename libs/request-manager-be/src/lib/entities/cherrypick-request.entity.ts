@@ -1,47 +1,53 @@
 import { CherrypickStatus } from "@cherrypicker/request-manager-core";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { CherrypickCommitEntity } from "./cherrypick-commit.entity";
 import { VCSRepositoryEntity } from "./vcs-repository.entity";
 
 @Entity()
 export class CherrypickRequestEntity {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-    @PrimaryGeneratedColumn()
-    id!: number;
+  @Column()
+  title!: string;
 
-    @Column()
-    title!: string;
+  @Column()
+  createdOn!: Date;
 
-    @Column()
-    createdOn!: Date;
+  @Column()
+  createdBy!: number;
 
-    @Column()
-    createdBy!: number;
+  @Column({
+    type: "enum",
+    enum: CherrypickStatus,
+  })
+  status!: CherrypickStatus;
 
-    @Column({
-        type: 'enum',
-        enum: CherrypickStatus, 
-    })
-    status!: CherrypickStatus;
+  @Column()
+  targetBranch!: string;
 
-    @Column()
-    targetBranch!: string;
+  @Column({
+    nullable: true,
+  })
+  completedOn!: Date | null;
 
-    @Column({
-        nullable: true
-    })
-    completedOn!: Date | null;
+  @Column()
+  repoId!: number;
 
-    @Column()
-    repoId!: number;
+  @ManyToOne(() => VCSRepositoryEntity, (repo) => repo.cherrypickRequests) // Define the relation to VCSRepositoryEntity
+  @JoinColumn({ name: "repoId" }) // Specify the column name that holds the repo ID
+  repository!: VCSRepositoryEntity; // Use the VCSRepositoryEntity type here
 
-    @ManyToOne(() => VCSRepositoryEntity, repo => repo.cherrypickRequests)  // Define the relation to VCSRepositoryEntity
-    @JoinColumn({ name: 'repoId' })  // Specify the column name that holds the repo ID
-    repository!: VCSRepositoryEntity;  // Use the VCSRepositoryEntity type here
+  @Column()
+  notesForApprover!: string;
 
-    @Column()
-    notesForApprover!: string
-
-    @OneToMany(() => CherrypickCommitEntity, commit => commit.request)
-    commits!: CherrypickCommitEntity[];
+  @OneToMany(() => CherrypickCommitEntity, (commit) => commit.request)
+  commits!: CherrypickCommitEntity[];
 }

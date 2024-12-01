@@ -2,27 +2,27 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class UserEntity {
-    @PrimaryGeneratedColumn()
-    id!: number;
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-    @Column()
-    subjectId!: number;
+  @Column()
+  subjectId!: number;
 
-    @Column()
-    name!: string;
+  @Column()
+  name!: string;
 
-    @Column()
-    avatarUrl!: string;
+  @Column()
+  avatarUrl!: string;
 
-    @Column()
-    lastLoggedOn!: Date;
+  @Column()
+  lastLoggedOn!: Date;
 
-    @Column()
-    accessToken!: string;
+  @Column()
+  accessToken!: string;
 
-    @Column()
-    createdOn!: Date
+  @Column()
+  createdOn!: Date;
 
-    @Column()
-    subjectLogin!: string;
+  @Column()
+  subjectLogin!: string;
 }
