@@ -6,7 +6,10 @@
     "frontend:dev": "nx serve frontend",
     "backend:dev": "nx serve backend",
     "frontend:build": "nx build frontend",
-    "backend:build": "nx build backend"
+    "backend:build": "nx build backend",
+    "db:migrations:compile": "tsc apps/backend/src/database/config/data-source.ts -outDir './dist/database/' && tsc --project ./apps/backend/tsconfig.db-migrations.json",
+    "db:migrations:run": "typeorm -d ./dist/database/data-source.js migration:run",
+    "db:migrations:revert": "typeorm -d ./dist/database/data-source.js migration:revert"
   },
   "private": true,
   "devDependencies": {
