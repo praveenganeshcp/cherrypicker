@@ -22,12 +22,11 @@ export class FetchCherrypickRequestDetailUsecase {
   async execute(input: FetchCherrypickRequestDetailUsecaseInput) {
     const requestWithCommits = await this.cherrypickRequestRepo
       .createQueryBuilder("request")
+      .where("request.id = :requestId", { requestId: input.id })
+      .andWhere("request.createdBy = :createdBy", { createdBy: input.createdBy }) // Filter by requestId
       .leftJoinAndSelect("request.commits", "commit")
       .leftJoinAndSelect("request.repository", "repo") // Join commits related to the request
-      .where("request.id = :requestId", { requestId: input.id })
-      .where("request.createdBy = :createdBy", { createdBy: input.createdBy }) // Filter by requestId
       .getOne(); // Use getOne() to fetch a single result
-
     return requestWithCommits;
   }
 }
