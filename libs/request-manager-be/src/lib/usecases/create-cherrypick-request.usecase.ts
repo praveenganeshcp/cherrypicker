@@ -2,13 +2,14 @@ import { GitCommit } from "@cherrypicker/github-api";
 import { CherrypickRequestEntity } from "../entities/cherrypick-request.entity";
 import { CherrypickStatus } from "@cherrypicker/request-manager-core";
 import { CherrypickCommitEntity } from "../entities/cherrypick-commit.entity";
-import { Inject, Injectable, Logger } from "@nestjs/common";
+import { BadRequestException, Inject, Injectable, Logger } from "@nestjs/common";
 import { EmailNotificationService } from "@cherrypick/notifications-be";
 import { UserEntity } from "@cherrypicker/auth-be";
 import { appConfig } from "@cherrypicker/config-be";
 import { ConfigType } from "@nestjs/config";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { VCSRepositoryEntity } from "../entities/vcs-repository.entity";
 
 export interface CreateCherrypickRequestUsecaseInput {
   title: string;
@@ -26,6 +27,9 @@ export class CreateCherrypickRequestUsecase {
   constructor(
     @InjectRepository(CherrypickRequestEntity)
     private readonly cherrypickRequestRepo: Repository<CherrypickRequestEntity>,
+
+    @InjectRepository(VCSRepositoryEntity)
+    private readonly vcsRepo: Repository<VCSRepositoryEntity>,
 
     @InjectRepository(CherrypickCommitEntity)
     private readonly cherrypickCommitRepo: Repository<CherrypickCommitEntity>,
@@ -71,10 +75,14 @@ export class CreateCherrypickRequestUsecase {
     input: CreateCherrypickRequestUsecaseInput
   ): Promise<CherrypickRequestEntity> {
     const newCherrypickRequest = new CherrypickRequestEntity();
+    const repo = await this.vcsRepo.findOneBy({ id: input.repoId })
+    if(!repo) {
+      throw new BadRequestException("Invalid repo");
+    }
 
     newCherrypickRequest.title = input.title;
     newCherrypickRequest.targetBranch = input.targetBranch;
-    newCherrypickRequest.repoId = input.repoId;
+    newCherrypickRequest.repository = repo;
     newCherrypickRequest.createdOn = new Date();
     newCherrypickRequest.status = CherrypickStatus.WaitingForApproval;
     newCherrypickRequest.completedOn = null;
@@ -96,7 +104,6 @@ export class CreateCherrypickRequestUsecase {
           message: commit.message,
           url: commit.htmlUrl,
           commitedOn: commit.timestamp,
-          requestId: cherrypickRequest.id,
           request: cherrypickRequest,
         };
         return requestCommit;

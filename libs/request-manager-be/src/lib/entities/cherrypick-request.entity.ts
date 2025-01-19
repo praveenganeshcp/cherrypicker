@@ -18,34 +18,33 @@ export class CherrypickRequestEntity {
   @Column()
   title!: string;
 
-  @Column()
+  @Column({ name: "created_on" })
   createdOn!: Date;
 
-  @Column()
+  @Column({ name: "created_by" })
   createdBy!: number;
 
   @Column({
     type: "enum",
     enum: CherrypickStatus,
+    enumName: "cherrypick_status_enum"
   })
   status!: CherrypickStatus;
 
-  @Column()
+  @Column({ name: "target_branch" })
   targetBranch!: string;
 
   @Column({
     nullable: true,
+    name: "completed_on"
   })
   completedOn!: Date | null;
 
-  @Column()
-  repoId!: number;
-
   @ManyToOne(() => VCSRepositoryEntity, (repo) => repo.cherrypickRequests) // Define the relation to VCSRepositoryEntity
-  @JoinColumn({ name: "repoId" }) // Specify the column name that holds the repo ID
+  @JoinColumn({ name: "repo_id" }) // Specify the column name that holds the repo ID
   repository!: VCSRepositoryEntity; // Use the VCSRepositoryEntity type here
 
-  @Column()
+  @Column({ name: "notes_for_approver" })
   notesForApprover!: string;
 
   @OneToMany(() => CherrypickCommitEntity, (commit) => commit.request)

@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "outDir": "../../dist/database/migrations",       // Output directory for compiled migration files
+      "module": "commonjs",     
+      "target": "ESNext",       
+      "strict": true,           
+      "esModuleInterop": true,  
+      "skipLibCheck": true,
+      "resolveJsonModule": true
+    },
+    "include": ["src/database/migrations/*.ts"],
+    "exclude": ["node_modules"]
+}
+  

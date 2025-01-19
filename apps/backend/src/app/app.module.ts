@@ -24,7 +24,7 @@ import { ConfigType } from "@nestjs/config";
           synchronize: false,
           autoLoadEntities: true,
           entities: [__dirname + "/../**/*.entity{.ts,.js}"],
-          logging: true,
+          logging: true
         };
       },
     }),

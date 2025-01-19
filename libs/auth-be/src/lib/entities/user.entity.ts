@@ -5,24 +5,24 @@ export class UserEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ name: "subject_id" })
   subjectId!: number;
 
   @Column()
   name!: string;
 
-  @Column()
+  @Column({ name: "avatar_url" })
   avatarUrl!: string;
 
-  @Column()
+  @Column({ name: "last_logged_on" })
   lastLoggedOn!: Date;
 
-  @Column()
+  @Column({ name: "access_token" })
   accessToken!: string;
 
-  @Column()
+  @Column({ name: "created_on" })
   createdOn!: Date;
 
-  @Column()
+  @Column({ name: "subject_login" })
   subjectLogin!: string;
 }

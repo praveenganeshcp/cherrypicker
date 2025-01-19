@@ -44,20 +44,21 @@ export class ApproveAndInitiateCherrypickUsecase {
       `cherrypick request ${input.requestId.toString()} approved`
     );
     this.logger.log(`Finding commits in request ${input.requestId.toString()}`);
-    const commits = await this.cherrypickCommitRepo.findBy({
-      requestId: input.requestId,
-    });
-    this.logger.log(`Found ${commits.length} commits in the request`);
     const cherrypickRequest = await this.cherrypickRequestRepo.findOneBy({
       createdBy: input.createdBy,
       id: input.requestId,
     });
-    if (cherrypickRequest == null || commits.length === 0) {
+    
+    if (cherrypickRequest == null) {
       throw new HttpException(
         "Cherrypick request not found",
         HttpStatus.NOT_FOUND
       );
     }
+    const commits = await this.cherrypickCommitRepo.findBy({
+      request: cherrypickRequest
+    });
+    this.logger.log(`Found ${commits.length} commits in the request`);
     this.logger.log(`Initiating cherrypick workflow`);
     return this.githubService.triggerWorkflow(
       input.accessToken,
