@@ -27,7 +27,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
     try {
       const jwt: string = req.cookies.token || "";
       req["authUser"] = await this.fetchUserDetails(jwt);
-      this.logger.log(`User ${req["authUser"].name} is authenticated`);
+      // Logger statement removed
       next();
     } catch (err) {
       if (err instanceof JsonWebTokenError) {
