@@ -9,7 +9,7 @@ export class JWTService {
 
   private readonly JWT_ALGORITHM: SignOptions["algorithm"] = "HS512";
 
-  private readonly TOKEN_EXPIRES_IN: string = "7d";
+  private readonly TOKEN_EXPIRES_IN: string = "10d";
 
   private logger = new Logger(JWTService.name);
 
