@@ -1,5 +1,6 @@
 export interface UserProfile {
-  name: string;
-  avatarUrl: string;
-  email: string;  // New email property added here
+   name: string;
+   avatarUrl: string;
+   email: string;
+   country: string; // New country property added here
 }
