@@ -1,7 +1,6 @@
 import {
   Injectable,
   NestMiddleware,
-  Logger,
   HttpException,
 } from "@nestjs/common";
 import { Response } from "express";
@@ -13,7 +12,6 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class AuthenticationMiddleware implements NestMiddleware {
-  private logger = new Logger(AuthenticationMiddleware.name);
 
   constructor(
     @InjectRepository(UserEntity)
@@ -23,11 +21,9 @@ export class AuthenticationMiddleware implements NestMiddleware {
 
   // TODO: use express req type
   async use(req: any, res: Response, next: (error?: unknown) => void) {
-    this.logger.log("Running auth middleware");
     try {
       const jwt: string = req.cookies.token || "";
       req["authUser"] = await this.fetchUserDetails(jwt);
-      this.logger.log(`User ${req["authUser"].name} is authenticated`);
       next();
     } catch (err) {
       if (err instanceof JsonWebTokenError) {
