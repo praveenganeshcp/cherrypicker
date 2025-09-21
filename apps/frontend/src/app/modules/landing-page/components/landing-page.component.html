@@ -4,7 +4,7 @@
       *ngIf="(isUserAuthenticated$ | async) === false; else authUser"
       class="login-section"
     >
-      <a [href]="ghAuthorizeEndpoint">Login with Github</a>
+      <a [href]="ghAuthorizeEndpoint">Signin with Github</a>
     </div>
     <ng-template #authUser>
       <p>Welcome, {{ (userProfile$ | async)?.name }}!</p>
